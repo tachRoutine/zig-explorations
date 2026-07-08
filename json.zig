@@ -4,7 +4,7 @@ const User =  struct{
     name: []const u8
 };
 
-const user_json = 
+const user_json =
     \\{"name":"Tach"}
 ;
 
