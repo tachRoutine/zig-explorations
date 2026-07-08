@@ -17,16 +17,17 @@ pub fn main(init: std.process.Init) !void {
     std.debug.print("exit code: {}\n", .{result.term.exited});
 }
 
-pub fn splitStringToArrayWithdelimeter(
-    gpa: std.mem.Allocator, 
-    s: []const u8,
-    delimiter: []const u8
-)[_] [] const u8{
-    var it = std.mem.splitScalar(u8, s,delimiter);
-    var arrVal: std.ArrayList(u8) = .empty;
-    while(it.next()) |val| {
-        arrVal.append(gpa, val);
-    }
+// pub fn splitStringToArrayWithdelimeter(
+//     gpa: std.mem.Allocator, 
+//     s: []const u8,
+//     delimiter: []const u8
+// ) {
+//     var it = std.mem.splitScalar(u8, s,delimiter);
+//     var arrVal: std.ArrayList(u8) = .empty;
+//     defer arrVal.deinit(gpa);
+//     while(it.next()) |val| {
+//         arrVal.append(gpa, val);
+//     }
 
-    return arrVal;
-}
+//     return arrVal;
+// }
