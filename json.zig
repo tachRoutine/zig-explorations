@@ -2,10 +2,6 @@ const std = @import("std");
 
 const User = struct { name: []const u8 };
 
-const user_json =
-    \\{"name":"Tach"}
-;
-
 pub fn main(init: std.process.Init) !void {
     const allocator = init.gpa;
     const io = init.io;
@@ -22,8 +18,8 @@ pub fn main(init: std.process.Init) !void {
     };
     defer allocator.free(json_data);
 
-    std.debug.print("raw data from {s} {s}", .{ file_path, json_data });
-    const parsed_user = try std.json.parseFromSlice(User, allocator, user_json, .{});
+    std.debug.print("raw data from {s}\n {s}\n", .{ file_path, json_data });
+    const parsed_user = try std.json.parseFromSlice(User, allocator, json_data, .{});
     defer parsed_user.deinit();
 
     std.debug.print("user before: {s}\n", .{parsed_user.value.name});
@@ -38,6 +34,11 @@ pub fn main(init: std.process.Init) !void {
     try buf.writer.print("{f}", .{std.json.fmt(user1, .{})});
     const json_bytes = buf.written();
     std.debug.print("After {s}\n", .{json_bytes});
+
+    try cwd.writeFile(io, .{
+        .sub_path = file_path,
+        .data = json_bytes,
+    });
 }
 
 // pub fn readJsonFile(io Io){
