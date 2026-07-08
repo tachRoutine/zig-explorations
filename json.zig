@@ -17,5 +17,7 @@ pub fn main(init: std.process.Init) !void {
     var user1: User = .{
         .name= "meee",
     };
+
+    try std.json.Formatter(User).format();
     
 }
