@@ -10,9 +10,12 @@ pub fn main(init: std.process.Init) !void {
     const allocator = init.gpa;
     const io = init.io;
     const cwd = std.Io.Dir.cwd();
-    const file_path = "user.json";
+    const file_path = "userss.json";
 
-    const json_data = try cwd.readFileAlloc(io, file_path, allocator, .unlimited);
+    const json_data = cwd.readFileAlloc(io, file_path, allocator, .unlimited) catch | err | switch (err) {
+        error.FileNotFound => std.debug.print("File does not exist\n",.{}),
+        else => unreachable
+    };
     defer allocator.free(json_data);
 
     std.debug.print("raw data from {s} {s}", .{ file_path, json_data });
