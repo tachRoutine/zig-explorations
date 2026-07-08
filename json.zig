@@ -10,10 +10,14 @@ pub fn main(init: std.process.Init) !void {
     const allocator = init.gpa;
     const io = init.io;
     const cwd = std.Io.Dir.cwd();
-    const file_path = "userss.json";
+    const file_path = "user.json";
 
+    // Reading the json data from the file
     const json_data = cwd.readFileAlloc(io, file_path, allocator, .unlimited) catch | err | switch (err) {
-        error.FileNotFound => std.debug.print("File does not exist\n",.{}),
+        error.FileNotFound => {
+            std.debug.print("File does not exist\n",.{});
+            @panic("required config file missing");
+        },
         else => unreachable
     };
     defer allocator.free(json_data);
