@@ -5,7 +5,7 @@ pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
     // .iterate = true is required, or walk()/iterate() won't work
-    var dir = try std.Io.Dir.cwd().openDir(io, "/Users/mac/work/akili/erp/backend/docs/_wms_module", .{ .iterate = true });
+    var dir = try std.Io.Dir.cwd().openDir(io, "/Users/mac/work/akili/erp/backend/docs/", .{ .iterate = true });
     defer dir.close(io);
 
     var walker = try dir.walk(gpa);

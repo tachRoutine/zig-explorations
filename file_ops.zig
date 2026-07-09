@@ -1,5 +1,4 @@
 const std = @import("std");
-const String: type = []const u8;
 
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
