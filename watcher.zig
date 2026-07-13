@@ -5,6 +5,8 @@ pub fn main(init: std.process.Init) !void {
     const allocator = init.gpa;
     const string = try allocator.create([]const u8);
     defer allocator.destroy(string);
+
+    var arena = std.heap.ArenaAllocator.init(allocator);  // child allocator
     
 
     std.debug.print("string:{any} \n\n allocator:{any}",.{&string,allocator});
