@@ -1,6 +1,0 @@
-.zig-cache/
-zig-out/
-zig-pkg/
-release-bins/
-*.o
-.DS_Store
