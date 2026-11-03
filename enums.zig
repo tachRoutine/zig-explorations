@@ -25,6 +25,13 @@ const Shape = union(enum) {
     rectangle: struct { width: f32, height: f32 },
     point, // no data at all
 
+    const Kind = std.meta.Tag(@This());
+
+    /// returns the active tag of a union(enum)
+    pub fn active(self: Shape) Kind {
+        return std.meta.activeTag(self);
+    }
+
     pub fn area(self: Shape) f32 {
         return switch (self) {
             .circle => |r| std.math.pi * r * r,
