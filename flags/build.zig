@@ -6,7 +6,7 @@ pub fn build(b: *std.Build) void {
 
     const flags = b.dependency("flags", .{});
     const exe = b.addExecutable(.{
-        .name = "flags",
+        .name = "sayit",
         .root_module = b.createModule(.{
             .root_source_file = b.path("src/main.zig"),
             .target = target,
